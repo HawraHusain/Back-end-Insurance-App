@@ -6,7 +6,8 @@ const IncurancePolicySchema = new mongoose.Schema({
     icon: { type: String, required: true }, 
     dateIssued: { type: Date, required: true },
     dateExpiry: { type: Date, required: true },
-    companyId: { type: mongoose.Schema.Types.ObjectId, ref: 'Company', required: true },    
+    companyId: { type: mongoose.Schema.Types.ObjectId, ref: 'Company', required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },  
     subscriptionPrice: { type: Number, required: true },
 }, { timestamps: true });
 
