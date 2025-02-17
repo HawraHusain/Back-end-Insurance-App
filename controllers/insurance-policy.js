@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-const IncurancePolicy = require('../models/incurancePolicy');
+const InsurancePolicy = require('../models/incurancePolicy');
 
 const verifyToken = require('../middleware/verify-token');
 
 router.get('/', verifyToken, async (req, res) => {
   try {
-    const incurancePolicies = await IncurancePolicy.find({}, "username");
+    const insurancePolicies = await InsurancePolicy.find({}, "username");
 
-    res.json(incurancePolicies);
+    res.json(insurancePolicies);
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
@@ -17,8 +17,8 @@ router.get('/', verifyToken, async (req, res) => {
 
 router.post('/new', verifyToken, async (req, res) => {
   try {
-    const createdIncurancePolicy = await IncurancePolicy.create(req.body);
-    res.status(201).json(createdIncurancePolicy); // 201 Created
+    const createdInsurancePolicy = await InsurancePolicy.create(req.body);
+    res.status(201).json(createdInsurancePolicy); // 201 Created
   } catch (err) {
     res.status(500).json({err: err.message})
   }

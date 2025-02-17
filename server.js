@@ -11,7 +11,8 @@ const logger = require('morgan');
 const authRouter = require('./controllers/auth');
 const testJwtRouter = require('./controllers/test-jwt');
 const usersRouter = require('./controllers/users');
-const incurancePolicyRouter = require('./controllers/incurance-policy');
+const insurancePolicyRouter = require('./controllers/insurance-policy');
+const companiesRouter = require('./controllers/companies');
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI);
@@ -29,7 +30,10 @@ app.use(logger('dev'));
 app.use('/auth', authRouter);
 app.use('/test-jwt', testJwtRouter);
 app.use('/users', usersRouter);
-app.use('/insurance', incurancePolicyRouter);
+app.use('/company', companiesRouter);
+app.use('/insurance', insurancePolicyRouter);
+
+
 
 // Start the server and listen on port 3000
 app.listen(3000, () => {
