@@ -8,8 +8,7 @@ const verifyToken = require('../middleware/verify-token');
 //get all
 router.get('/', verifyToken, async (req, res) => {
   try {
-    const company = await Company.find({}, "username");
-
+    const company = await Company.find({});
     res.json(company);
   } catch (err) {
     res.status(500).json({ err: err.message });
