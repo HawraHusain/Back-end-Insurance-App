@@ -69,7 +69,7 @@ router.delete('/:companyId', verifyToken, async (req, res) => {
 
 
   // UPDATE 
-router.put('/:companyId', async (req, res) => {
+router.put('/:companyId/edit', async (req, res) => {
     try {
       const foundCompany = await Company.findByIdAndUpdate(req.params.companyId, req.body, {
         new: true,
