@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const InsurancePolicy = require('../models/incurancePolicy');
+const InsurancePolicy = require('../models/insurancePolicy');
 
 const verifyToken = require('../middleware/verify-token');
+const jwt = require('jsonwebtoken');
+
 
 //get all
 router.get('/', verifyToken, async (req, res) => {
@@ -32,7 +34,7 @@ router.post('/new', verifyToken, async (req, res) => {
     const user = decoded.payload;
     const newInsurancePolicy = {
       companyId: companyId,
-      userId: user.userId._id,
+      userId: user,
       dateIssued: startDate,
       dateExpiry: endDate,
       policyNo: policyNo,
