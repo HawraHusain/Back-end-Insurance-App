@@ -19,7 +19,29 @@ router.get('/', verifyToken, async (req, res) => {
 //create
 router.post('/new', verifyToken, async (req, res) => {
   try {
-    const createdInsurancePolicy = await InsurancePolicy.create(req.body);
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const companyId = req.body.companyId;
+    const startDate = req.body.dateIssued;
+    const endDate = req.body.dateExpiry;
+    const policyNo = req.body.policyNo;
+    const category = req.body.category;
+    const subscriptionPrice = req.body.subscriptionPrice;
+    const icon = req.body.icon;
+      
+    const user = decoded.payload;
+    const newInsurancePolicy = {
+      companyId: companyId,
+      userId: user.userId._id,
+      dateIssued: startDate,
+      dateExpiry: endDate,
+      policyNo: policyNo,
+      category: category,
+      subscriptionPrice: subscriptionPrice,
+      icon: icon
+    }
+      
+    const createdInsurancePolicy = await InsurancePolicy.create(newInsurancePolicy);
     res.status(201).json(createdInsurancePolicy); // 201 Created
   } catch (err) {
     res.status(500).json({err: err.message})
@@ -68,7 +90,7 @@ router.delete('/:insurancePolicyId', verifyToken, async (req, res) => {
 
 
 // UPDATE 
-router.put('/:insurancePolicyId',  verifyToken, async (req, res) => {
+router.put('/:insurancePolicyId/edit',  verifyToken, async (req, res) => {
   try {
     const foundInsurancePolicy = await InsurancePolicy.findByIdAndUpdate(req.params.insurancePolicyId, req.body, {
       new: true,
