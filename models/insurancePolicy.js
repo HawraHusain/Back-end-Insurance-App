@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const IncurancePolicySchema = new mongoose.Schema({
+const InsurancePolicySchema = new mongoose.Schema({
     category: { enum: ['health', 'life', 'car', 'travel', 'home'], type: String, required: true },
     policyNo: { type: Number, immutable: true },
     icon: { type: String }, 
@@ -11,6 +11,6 @@ const IncurancePolicySchema = new mongoose.Schema({
     subscriptionPrice: { type: Number, required: true },
 }, { timestamps: true });
 
-const IncurancePolicy = mongoose.model('incurancePolicy', IncurancePolicySchema);
+const InsurancePolicy = mongoose.model('insurancePolicy', InsurancePolicySchema);
 
-module.exports = IncurancePolicy;
+module.exports = InsurancePolicy;

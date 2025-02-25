@@ -10,8 +10,7 @@ const jwt = require('jsonwebtoken');
 //get all
 router.get('/', verifyToken, async (req, res) => {
   try {
-    const insurancePolicies = await InsurancePolicy.find({userId:req.body.userId});
-
+    const insurancePolicies = await InsurancePolicy.find({userId:req.user._id});
     res.json(insurancePolicies);
   } catch (err) {
     res.status(500).json({ err: err.message });
